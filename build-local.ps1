@@ -23,8 +23,8 @@ $examples = @(
     "1.0.7/editor",
     "1.1.1/viewer",
     "1.1.1/editor",
-    "1.1.2/viewer",
-    "1.1.2/editor"
+    "1.1.3/viewer",
+    "1.1.3/editor"
 )
 
 $root = $PSScriptRoot
@@ -102,7 +102,7 @@ foreach ($ex in $examples) {
         $needInstall = $Force -or (-not (Test-Path "node_modules"))
         if ($needInstall) {
             Write-Host "[STEP] npm install (peut prendre 1-2 min)..." -ForegroundColor DarkGray
-            cmd /c "npm install --no-audit --no-fund --prefer-offline 2>&1"
+            cmd /c "npm install --no-audit --no-fund --prefer-offline --legacy-peer-deps 2>&1"
             if ($LASTEXITCODE -ne 0) { throw "npm install a echoue (exit $LASTEXITCODE)" }
         }
         else {
