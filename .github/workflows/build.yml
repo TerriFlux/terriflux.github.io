@@ -49,34 +49,64 @@ jobs:
 
       - name: Build each example
         run: |
-          set -euo pipefail
+          set -uo pipefail   # NB: pas de -e, on tolere les echecs par exemple
           mkdir -p public
 
           # Copy committed root index.html and assets
           cp index.html public/
           [ -f favicon.ico ] && cp favicon.ico public/ || true
 
+          built=()
+          failed=()
+
           while IFS= read -r ex; do
             [ -z "$ex" ] && continue
             src_dir="opensankey-src/examples/$ex"
             dest_dir="public/$ex"
             echo "::group::Building $ex"
+
             if [ ! -d "$src_dir" ]; then
-              echo "⚠️  $src_dir not found, skipping"
+              echo "$src_dir not found, skipping"
+              failed+=("$ex (source not found)")
               echo "::endgroup::"
               continue
             fi
-            pushd "$src_dir" > /dev/null
-            # Make the build use a relative public path (so it works under /<v>/<kind>/)
-            export PUBLIC_URL="."
-            npm install --no-audit --no-fund --prefer-offline
-            npm run build
-            popd > /dev/null
-            mkdir -p "$dest_dir"
-            cp -r "$src_dir/build/"* "$dest_dir/"
-            echo "✅ $ex built"
+
+            (
+              set -e
+              cd "$src_dir"
+              # Build path relatif (la vitrine sert chaque demo sous /<v>/<kind>/)
+              export PUBLIC_URL="."
+              # CI use Node 20 + npm 10 strict ; les deps de react-scripts 5
+              # entrent en conflit avec TS 5.x => --legacy-peer-deps
+              npm install --no-audit --no-fund --prefer-offline --legacy-peer-deps
+              npm run build
+            )
+
+            if [ $? -eq 0 ] && [ -d "$src_dir/build" ]; then
+              mkdir -p "$dest_dir"
+              cp -r "$src_dir/build/"* "$dest_dir/"
+              echo "OK: $ex built"
+              built+=("$ex")
+            else
+              echo "FAILED: $ex"
+              failed+=("$ex")
+            fi
             echo "::endgroup::"
           done <<< "$EXAMPLE_MATRIX"
+
+          echo ""
+          echo "================================================="
+          echo "Summary"
+          echo "  Built  (${#built[@]}): ${built[*]:-(none)}"
+          echo "  Failed (${#failed[@]}): ${failed[*]:-(none)}"
+
+          # On considere le job OK tant qu'au moins un exemple s'est build.
+          # Comme ca on deploie quand meme une vitrine partielle.
+          if [ ${#built[@]} -eq 0 ]; then
+            echo "::error::No example built successfully, aborting."
+            exit 1
+          fi
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
