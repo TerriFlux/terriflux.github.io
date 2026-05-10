@@ -21,8 +21,6 @@ $ErrorActionPreference = 'Stop'
 $examples = @(
     "1.0.7/viewer",
     "1.0.7/editor",
-    "1.1.1/viewer",
-    "1.1.1/editor",
     "1.1.3/viewer",
     "1.1.3/editor"
 )
