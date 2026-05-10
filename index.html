@@ -68,14 +68,22 @@
       padding: .6rem .75rem;
       border: 1px solid var(--border);
       border-radius: 6px;
-      text-decoration: none;
-      color: var(--fg);
       background: #fafbfc;
       transition: background .1s;
     }
     .ex:hover { background: #f0f4f8; }
-    .ex strong { color: var(--accent); font-size: .95rem; }
-    .ex span { color: var(--muted); font-size: .75rem; margin-top: .15rem; }
+    .ex > a { text-decoration: none; color: var(--fg); display: block; }
+    .ex > a strong { color: var(--accent); font-size: .95rem; }
+    .ex > a span { color: var(--muted); font-size: .75rem; margin-top: .15rem; display: block; }
+    .ex .cs {
+      margin-top: .35rem;
+      padding-top: .35rem;
+      border-top: 1px dashed var(--border);
+      font-size: .7rem;
+      color: var(--accent);
+      text-decoration: none;
+    }
+    .ex .cs:hover { text-decoration: underline; }
     .ex .badge {
       display: inline-block;
       font-size: .65rem;
@@ -115,24 +123,32 @@
         <div class="resources">
           <a href="https://www.npmjs.com/package/open-sankey/v/1.1.3" target="_blank" rel="noopener">npm ↗</a>
           <a href="https://su-model.gitlab.io/opensankey/1.1.3/" target="_blank" rel="noopener">CDN gitlab.io ↗</a>
-          <a href="https://codesandbox.io/p/github/TerriFlux/opensankey/main?file=examples/1.1.3/viewer/src/index.tsx" target="_blank" rel="noopener">CodeSandbox ↗</a>
           <a href="https://github.com/TerriFlux/opensankey/tree/main/examples/1.1.3" target="_blank" rel="noopener">code source ↗</a>
         </div>
       </div>
       <p class="version-desc">Dernière version. Fix `ViewerOpenSankeyApp` (React error #321) + nettoyage craco editor.</p>
       <div class="grid">
-        <a class="ex" href="./1.1.3/viewer/" target="_blank" rel="noopener">
-          <strong>viewer<span class="badge badge-react">react</span></strong>
-          <span>App React, lecture seule</span>
-        </a>
-        <a class="ex" href="./1.1.3/editor/" target="_blank" rel="noopener">
-          <strong>editor<span class="badge badge-react">react</span></strong>
-          <span>App React, édition complète</span>
-        </a>
-        <a class="ex" href="./1.1.3/html-viewer/" target="_blank" rel="noopener">
-          <strong>html-viewer<span class="badge badge-html">html</span></strong>
-          <span>HTML pur, charge bundle CDN</span>
-        </a>
+        <div class="ex">
+          <a href="./1.1.3/viewer/" target="_blank" rel="noopener">
+            <strong>viewer<span class="badge badge-react">react</span></strong>
+            <span>App React, lecture seule</span>
+          </a>
+          <a class="cs" href="https://codesandbox.io/s/github/TerriFlux/opensankey/tree/main/examples/1.1.3/viewer" target="_blank" rel="noopener">éditer dans CodeSandbox ↗</a>
+        </div>
+        <div class="ex">
+          <a href="./1.1.3/editor/" target="_blank" rel="noopener">
+            <strong>editor<span class="badge badge-react">react</span></strong>
+            <span>App React, édition complète</span>
+          </a>
+          <a class="cs" href="https://codesandbox.io/s/github/TerriFlux/opensankey/tree/main/examples/1.1.3/editor" target="_blank" rel="noopener">éditer dans CodeSandbox ↗</a>
+        </div>
+        <div class="ex">
+          <a href="./1.1.3/html-viewer/" target="_blank" rel="noopener">
+            <strong>html-viewer<span class="badge badge-html">html</span></strong>
+            <span>HTML pur, charge bundle CDN</span>
+          </a>
+          <a class="cs" href="https://codesandbox.io/s/github/TerriFlux/opensankey/tree/main/examples/1.1.3/html-viewer" target="_blank" rel="noopener">éditer dans CodeSandbox ↗</a>
+        </div>
       </div>
     </section>
 
@@ -142,24 +158,32 @@
         <div class="resources">
           <a href="https://www.npmjs.com/package/open-sankey/v/1.0.7" target="_blank" rel="noopener">npm ↗</a>
           <a href="https://su-model.gitlab.io/opensankey/1.0.7/" target="_blank" rel="noopener">CDN gitlab.io ↗</a>
-          <a href="https://codesandbox.io/p/github/TerriFlux/opensankey/main?file=examples/1.0.7/viewer/src/index.tsx" target="_blank" rel="noopener">CodeSandbox ↗</a>
           <a href="https://github.com/TerriFlux/opensankey/tree/main/examples/1.0.7" target="_blank" rel="noopener">code source ↗</a>
         </div>
       </div>
       <p class="version-desc">Première version publique de la série 1.0.</p>
       <div class="grid">
-        <a class="ex" href="./1.0.7/viewer/" target="_blank" rel="noopener">
-          <strong>viewer<span class="badge badge-react">react</span></strong>
-          <span>App React, lecture seule</span>
-        </a>
-        <a class="ex" href="./1.0.7/editor/" target="_blank" rel="noopener">
-          <strong>editor<span class="badge badge-react">react</span></strong>
-          <span>App React, édition complète</span>
-        </a>
-        <a class="ex" href="./1.0.7/html-viewer/" target="_blank" rel="noopener">
-          <strong>html-viewer<span class="badge badge-html">html</span></strong>
-          <span>HTML pur, charge bundle CDN</span>
-        </a>
+        <div class="ex">
+          <a href="./1.0.7/viewer/" target="_blank" rel="noopener">
+            <strong>viewer<span class="badge badge-react">react</span></strong>
+            <span>App React, lecture seule</span>
+          </a>
+          <a class="cs" href="https://codesandbox.io/s/github/TerriFlux/opensankey/tree/main/examples/1.0.7/viewer" target="_blank" rel="noopener">éditer dans CodeSandbox ↗</a>
+        </div>
+        <div class="ex">
+          <a href="./1.0.7/editor/" target="_blank" rel="noopener">
+            <strong>editor<span class="badge badge-react">react</span></strong>
+            <span>App React, édition complète</span>
+          </a>
+          <a class="cs" href="https://codesandbox.io/s/github/TerriFlux/opensankey/tree/main/examples/1.0.7/editor" target="_blank" rel="noopener">éditer dans CodeSandbox ↗</a>
+        </div>
+        <div class="ex">
+          <a href="./1.0.7/html-viewer/" target="_blank" rel="noopener">
+            <strong>html-viewer<span class="badge badge-html">html</span></strong>
+            <span>HTML pur, charge bundle CDN</span>
+          </a>
+          <a class="cs" href="https://codesandbox.io/s/github/TerriFlux/opensankey/tree/main/examples/1.0.7/html-viewer" target="_blank" rel="noopener">éditer dans CodeSandbox ↗</a>
+        </div>
       </div>
     </section>
 
