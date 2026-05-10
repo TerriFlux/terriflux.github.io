@@ -77,6 +77,10 @@ jobs:
               cd "$src_dir"
               # Build path relatif (la vitrine sert chaque demo sous /<v>/<kind>/)
               export PUBLIC_URL="."
+              # GitHub Actions defines CI=true automatiquement, ce qui fait
+              # traiter les warnings ESLint comme des erreurs par react-scripts.
+              # On veut juste les builds, pas la stricte qualite => CI=false.
+              export CI=false
               # CI use Node 20 + npm 10 strict ; les deps de react-scripts 5
               # entrent en conflit avec TS 5.x => --legacy-peer-deps
               npm install --no-audit --no-fund --prefer-offline --legacy-peer-deps
