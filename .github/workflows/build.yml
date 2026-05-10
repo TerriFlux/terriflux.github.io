@@ -97,6 +97,22 @@ jobs:
             echo "::endgroup::"
           done <<< "$EXAMPLE_MATRIX"
 
+          # Copie des html-viewer (pas de build, juste du HTML+JSON+images)
+          for v in 1.0.7 1.1.3; do
+            hv_src="opensankey-src/examples/$v/html-viewer"
+            hv_dest="public/$v/html-viewer"
+            if [ -d "$hv_src" ]; then
+              echo "::group::Copying $v/html-viewer"
+              mkdir -p "$hv_dest"
+              cp -r "$hv_src/"* "$hv_dest/"
+              # On retire les serve scripts (inutiles en ligne)
+              rm -f "$hv_dest/serve.bat" "$hv_dest/serve.ps1" "$hv_dest/serve.sh"
+              echo "OK: $v/html-viewer copied"
+              built+=("$v/html-viewer")
+              echo "::endgroup::"
+            fi
+          done
+
           echo ""
           echo "================================================="
           echo "Summary"
