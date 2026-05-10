@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenSankey — démos TerriFlux</title>
+  <style>
+    :root {
+      --bg: #f7f7f8;
+      --fg: #1a1a1a;
+      --muted: #5f6368;
+      --card: #ffffff;
+      --border: #e3e3e6;
+      --accent: #2b6cb0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.5;
+    }
+    header {
+      padding: 2rem 1.5rem 1rem;
+      max-width: 1300px;
+      margin: 0 auto;
+    }
+    header h1 { margin: 0 0 .5rem; font-size: 1.75rem; }
+    header p { margin: 0; color: var(--muted); }
+    main { max-width: 1300px; margin: 0 auto; padding: 0 1.5rem 3rem; }
+
+    .version {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+    }
+    .version-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 1rem;
+    }
+    .version-head h2 { margin: 0; font-size: 1.25rem; }
+    .version-head .links { font-size: .85rem; color: var(--muted); }
+    .version-head .links a { color: var(--accent); text-decoration: none; margin-left: .75rem; }
+    .version-head .links a:hover { text-decoration: underline; }
+    .version-desc { color: var(--muted); margin: 0 0 1rem; }
+
+    .demos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 1rem;
+    }
+    .demo {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+    .demo-head {
+      padding: .5rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+      background: #fafafa;
+      font-size: .9rem;
+    }
+    .demo-head strong { font-size: .95rem; }
+    .demo-head a {
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .8rem;
+      margin-left: .5rem;
+    }
+    .demo-head a:hover { text-decoration: underline; }
+    .demo iframe {
+      width: 100%;
+      height: 540px;
+      border: 0;
+      display: block;
+      background: #fafafa;
+    }
+
+    footer {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem 2rem;
+      color: var(--muted);
+      font-size: .85rem;
+      text-align: center;
+    }
+    footer a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>OpenSankey — démos en ligne</h1>
+    <p>Vitrine TerriFlux des versions OpenSankey. Chaque démo est un build statique
+    de l'exemple React correspondant. Pour modifier le code en live, ouvre-le dans CodeSandbox.</p>
+  </header>
+
+  <main>
+
+    <section class="version">
+      <div class="version-head">
+        <h2>OpenSankey 1.1.2</h2>
+        <div class="links">
+          <a href="https://github.com/TerriFlux/opensankey/tree/main/examples/1.1.2" target="_blank" rel="noopener">code source ↗</a>
+          <a href="https://www.npmjs.com/package/open-sankey/v/1.1.2" target="_blank" rel="noopener">npm ↗</a>
+        </div>
+      </div>
+      <p class="version-desc">Dernière version figée.</p>
+      <div class="demos">
+        <div class="demo">
+          <div class="demo-head">
+            <strong>Viewer (lecture seule)</strong>
+            <span>
+              <a href="./1.1.2/viewer/" target="_blank" rel="noopener">plein écran ↗</a>
+              <a href="https://codesandbox.io/p/github/TerriFlux/opensankey/main?file=examples/1.1.2/viewer/src/index.tsx" target="_blank" rel="noopener">éditer ↗</a>
+            </span>
+          </div>
+          <iframe src="./1.1.2/viewer/" title="OpenSankey 1.1.2 viewer" loading="lazy"></iframe>
+        </div>
+        <div class="demo">
+          <div class="demo-head">
+            <strong>Editor (édition complète)</strong>
+            <span>
+              <a href="./1.1.2/editor/" target="_blank" rel="noopener">plein écran ↗</a>
+              <a href="https://codesandbox.io/p/github/TerriFlux/opensankey/main?file=examples/1.1.2/editor/src/index.tsx" target="_blank" rel="noopener">éditer ↗</a>
+            </span>
+          </div>
+          <iframe src="./1.1.2/editor/" title="OpenSankey 1.1.2 editor" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="version">
+      <div class="version-head">
+        <h2>OpenSankey 1.1.1</h2>
+        <div class="links">
+          <a href="https://github.com/TerriFlux/opensankey/tree/main/examples/1.1.1" target="_blank" rel="noopener">code source ↗</a>
+          <a href="https://www.npmjs.com/package/open-sankey/v/1.1.1" target="_blank" rel="noopener">npm ↗</a>
+        </div>
+      </div>
+      <p class="version-desc">Version intermédiaire.</p>
+      <div class="demos">
+        <div class="demo">
+          <div class="demo-head">
+            <strong>Viewer</strong>
+            <span>
+              <a href="./1.1.1/viewer/" target="_blank" rel="noopener">plein écran ↗</a>
+              <a href="https://codesandbox.io/p/github/TerriFlux/opensankey/main?file=examples/1.1.1/viewer/src/index.tsx" target="_blank" rel="noopener">éditer ↗</a>
+            </span>
+          </div>
+          <iframe src="./1.1.1/viewer/" title="OpenSankey 1.1.1 viewer" loading="lazy"></iframe>
+        </div>
+        <div class="demo">
+          <div class="demo-head">
+            <strong>Editor</strong>
+            <span>
+              <a href="./1.1.1/editor/" target="_blank" rel="noopener">plein écran ↗</a>
+              <a href="https://codesandbox.io/p/github/TerriFlux/opensankey/main?file=examples/1.1.1/editor/src/index.tsx" target="_blank" rel="noopener">éditer ↗</a>
+            </span>
+          </div>
+          <iframe src="./1.1.1/editor/" title="OpenSankey 1.1.1 editor" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="version">
+      <div class="version-head">
+        <h2>OpenSankey 1.0.7</h2>
+        <div class="links">
+          <a href="https://github.com/TerriFlux/opensankey/tree/main/examples/1.0.7" target="_blank" rel="noopener">code source ↗</a>
+          <a href="https://www.npmjs.com/package/open-sankey/v/1.0.7" target="_blank" rel="noopener">npm ↗</a>
+        </div>
+      </div>
+      <p class="version-desc">Première version publique de la série 1.0.</p>
+      <div class="demos">
+        <div class="demo">
+          <div class="demo-head">
+            <strong>Viewer</strong>
+            <span>
+              <a href="./1.0.7/viewer/" target="_blank" rel="noopener">plein écran ↗</a>
+              <a href="https://codesandbox.io/p/github/TerriFlux/opensankey/main?file=examples/1.0.7/viewer/src/index.tsx" target="_blank" rel="noopener">éditer ↗</a>
+            </span>
+          </div>
+          <iframe src="./1.0.7/viewer/" title="OpenSankey 1.0.7 viewer" loading="lazy"></iframe>
+        </div>
+        <div class="demo">
+          <div class="demo-head">
+            <strong>Editor</strong>
+            <span>
+              <a href="./1.0.7/editor/" target="_blank" rel="noopener">plein écran ↗</a>
+              <a href="https://codesandbox.io/p/github/TerriFlux/opensankey/main?file=examples/1.0.7/editor/src/index.tsx" target="_blank" rel="noopener">éditer ↗</a>
+            </span>
+          </div>
+          <iframe src="./1.0.7/editor/" title="OpenSankey 1.0.7 editor" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>
+      Sources :
+      <a href="https://gitlab.com/su-model/opensankey" target="_blank" rel="noopener">GitLab su-model/opensankey</a>
+      (upstream) ·
+      <a href="https://github.com/TerriFlux/opensankey" target="_blank" rel="noopener">GitHub TerriFlux/opensankey</a>
+      (mirror).
+    </p>
+  </footer>
+</body>
+</html>

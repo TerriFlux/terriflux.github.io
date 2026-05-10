@@ -1,0 +1,94 @@
+name: Build & deploy demos to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    # Daily check for upstream mirror updates (TerriFlux/opensankey is mirrored from GitLab)
+    - cron: '0 6 * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+env:
+  # examples/<version>/<kind>  →  built into ./public/<version>/<kind>/
+  # `current` and `html-viewer` are intentionally excluded.
+  EXAMPLE_MATRIX: |
+    1.0.7/viewer
+    1.0.7/editor
+    1.1.1/viewer
+    1.1.1/editor
+    1.1.2/viewer
+    1.1.2/editor
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout vitrine repo
+        uses: actions/checkout@v4
+
+      - name: Checkout TerriFlux/opensankey (mirror of GitLab)
+        uses: actions/checkout@v4
+        with:
+          repository: TerriFlux/opensankey
+          path: opensankey-src
+          submodules: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build each example
+        run: |
+          set -euo pipefail
+          mkdir -p public
+
+          # Copy committed root index.html and assets
+          cp index.html public/
+          [ -f favicon.ico ] && cp favicon.ico public/ || true
+
+          while IFS= read -r ex; do
+            [ -z "$ex" ] && continue
+            src_dir="opensankey-src/examples/$ex"
+            dest_dir="public/$ex"
+            echo "::group::Building $ex"
+            if [ ! -d "$src_dir" ]; then
+              echo "⚠️  $src_dir not found, skipping"
+              echo "::endgroup::"
+              continue
+            fi
+            pushd "$src_dir" > /dev/null
+            # Make the build use a relative public path (so it works under /<v>/<kind>/)
+            export PUBLIC_URL="."
+            npm install --no-audit --no-fund --prefer-offline
+            npm run build
+            popd > /dev/null
+            mkdir -p "$dest_dir"
+            cp -r "$src_dir/build/"* "$dest_dir/"
+            echo "✅ $ex built"
+            echo "::endgroup::"
+          done <<< "$EXAMPLE_MATRIX"
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: public
+
+  deploy:
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
