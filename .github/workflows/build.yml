@@ -113,6 +113,22 @@ jobs:
             fi
           done
 
+          # Copie de embedded (1.1.4 uniquement — exemple one-file inline JSON
+          # via window.sankey.diagram = <object> ; pas de build npm requis)
+          for v in 1.1.4; do
+            em_src="opensankey-src/examples/$v/embedded"
+            em_dest="public/$v/embedded"
+            if [ -d "$em_src" ]; then
+              echo "::group::Copying $v/embedded"
+              mkdir -p "$em_dest"
+              cp -r "$em_src/"* "$em_dest/"
+              rm -f "$em_dest/serve.bat" "$em_dest/serve.ps1" "$em_dest/serve.sh"
+              echo "OK: $v/embedded copied"
+              built+=("$v/embedded")
+              echo "::endgroup::"
+            fi
+          done
+
           echo ""
           echo "================================================="
           echo "Summary"
